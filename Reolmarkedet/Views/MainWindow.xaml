@@ -1,12 +1,15 @@
-﻿<Window x:Class="Reolmarkedet.MainWindow"
+﻿<Window x:Class="Reolmarkedet.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Reolmarkedet"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="{Binding Title}" Height="450" Width="800">
     <Grid>
-
+        <Label Content="Label" HorizontalAlignment="Left" Margin="22,10,0,0" VerticalAlignment="Top"/>
+        <Button Content="Start Salg" Command="{Binding Path=GoToSaleAsync}" HorizontalAlignment="Left" Margin="93,182,0,0" VerticalAlignment="Top" Height="35" Width="105" Click="Sale_Button_Click"/>
+        <Button Content="Lejer" HorizontalAlignment="Left" Margin="323,182,0,0" VerticalAlignment="Top" Height="35" Width="105"/>
+        <Button Content="Udlejning" HorizontalAlignment="Left" Margin="555,182,0,0" VerticalAlignment="Top" Height="35" Width="105"/>
     </Grid>
 </Window>

@@ -11,31 +11,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Reolmarkedet.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Salg.xaml
     /// </summary>
-    /// 
-
-    public partial class MainWindow : Window
+    public partial class Salg : Window
     {
 
-        BaseViewModels bvm = new();
-        public MainWindow()
+        SaleViewModels svm = new();
+        public Salg()
         {
             InitializeComponent();
-            DataContext = bvm;
-        }
-
-        private void Sale_Button_Click(object sender, RoutedEventArgs e)
-        {
-            Salg s = new();
-            s.Show();
-
+            DataContext = svm;
         }
     }
 }

@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 namespace Reolmarkedet.ModelViews
 {
-    public partial class BaseViewModel : ObservableObject
+    public partial class BaseViewModels : ObservableObject
     {
-        public BaseViewModel() { }
+        public BaseViewModels() 
+        {
+            Title = "ReolMarkedet";
+        }
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(IsNotBusy))]
