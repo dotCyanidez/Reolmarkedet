@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Reolmarkedet.Commands;
 using Reolmarkedet.Models;
 using Reolmarkedet.Views;
 using System;
@@ -14,7 +15,7 @@ namespace Reolmarkedet.ModelViews
     public partial class SaleViewModels : BaseViewModels
     {
         private SaleRepository _saleRepository = new();
-        public ObservableCollection<SalesItem> Items = new();
+        public ObservableCollection<SalesItem> Items { get; set; } = new();
 
         [ObservableProperty]
         private Sale sale;
@@ -24,21 +25,23 @@ namespace Reolmarkedet.ModelViews
 
         [ObservableProperty]
         private double priceLabel = 12.4;
+
+        public ICommand AddItemCommand { get; }
         public SaleViewModels()
         {
             Title = "Salg";
             Sale = _saleRepository.Add(0);
+            AddItemCommand = new AddItemCommand();
         }
 
 
-        public void AddSaleItem(int barcode,double price) 
+        public void AddSaleItem(int barcode, double price) 
         {
             //Her skal tilføjes noget der tjekker på om der eksistere en udlejning hvor id = barcode
             SalesItem item = new SalesItem( barcode, price);
             Items.Add(item);
 
             Sale.TotalPrice += item.Price;
-
         }
 
 
@@ -53,6 +56,11 @@ namespace Reolmarkedet.ModelViews
         {
             Barcode = barcode;
             Price = price;
+        }
+
+        public override string ToString()
+        {
+            return $"Stregkode: {Barcode} Pris: {Price}kr.";
         }
     }
 }

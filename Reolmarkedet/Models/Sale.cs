@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Reolmarkedet.Models
 {
-    public class Sale
+    public partial class Sale : ObservableObject
     {
         public int ID { get; set; }
         public DateTime SoldDate { get; set; }
-        public double TotalPrice { get; set; }
+        [ObservableProperty]
+        private double totalPrice;
 
     }
 }

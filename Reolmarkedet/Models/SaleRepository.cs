@@ -72,24 +72,33 @@ namespace Reolmarkedet.Models
         }
 
 
-        //denne metode er ikke testet
-        public Sale Get( int id)
+        //denne metode er ikke testet // men skal heller ikke bruges
+        //public Sale Get(int id)
+        //{
+        //    Sale result = saleList.FirstOrDefault(x => x.ID == id);
+
+
+        //    return result != null ? result : throw new Exception("Kunne ikke finde det salg du ledte efter");
+        //}
+
+        public async void UpdateSale(Sale sale)
         {
-            Sale result;
-            foreach (Sale s in saleList)
+            try
             {
-                if (s.ID == id)
+                using (SqlConnection con = new(_connectionString))
                 {
-                    result = s; break;
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("UPDATE SALE SET TotalPrice = @totalPrice WHERE ID = @id", con);
+                    cmd.Parameters.Add("@id", SqlDbType.Int).Value= sale.ID;
+                    cmd.Parameters.Add("@totalPrice", SqlDbType.Float).Value=sale.TotalPrice;
+                    await cmd.ExecuteNonQueryAsync();
                 }
             }
-       
-         return result != null ? result : throw( new ArgumentException("Sale does not exist"));
-        }
+            catch (Exception)
+            {
 
-        public List<Sale> GetAll()
-        {
-            return saleList;
+                throw;
+            }
         }
     }
 }

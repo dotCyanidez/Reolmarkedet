@@ -11,8 +11,16 @@
         <TextBox  HorizontalAlignment="Left" Margin="30,63,0,0" TextWrapping="Wrap" Text="{Binding BarcodeLabel}" VerticalAlignment="Top" Width="140" Height="32"/>
         <Label Content="Pris" HorizontalAlignment="Left" Margin="30,100,0,0" VerticalAlignment="Top"/>
         <TextBox  HorizontalAlignment="Left" Margin="30,131,0,0" TextWrapping="Wrap" Text="{Binding PriceLabel}" VerticalAlignment="Top" Width="140" Height="26"/>
-        <ListBox ItemsSource="{Binding Items}" Margin="190,30,369,176"/>
-        <Button Content="Tilføj vare"  HorizontalAlignment="Left" Margin="30,172,0,0" VerticalAlignment="Top" Height="33" Width="78"/>
+        <ListBox ItemsSource="{Binding Items}" FontSize="16" Margin="190,30,369,176">
+            <!--<ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Barcode}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>-->
+        </ListBox>
+        <Button Content="Tilføj vare" Command="{Binding AddItemCommand}" CommandParameter="{Binding}"  HorizontalAlignment="Left" Margin="30,172,0,0" VerticalAlignment="Top" Height="33" Width="78"/>
         <Button Content="Afslut salg" HorizontalAlignment="Left" Margin="190,271,0,0" VerticalAlignment="Top" Height="38" Width="95"/>
         <Label Content="TotalPris" HorizontalAlignment="Left" Margin="511,32,0,0" VerticalAlignment="Top" Height="27" Width="159"/>
         <Label Content="{Binding Sale.TotalPrice}" HorizontalAlignment="Left" Margin="511,68,0,0" VerticalAlignment="Top" Height="27" Width="159"/>
