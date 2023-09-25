@@ -9,7 +9,7 @@
     <Grid>
         <Label Content="Label" HorizontalAlignment="Left" Margin="22,10,0,0" VerticalAlignment="Top"/>
         <Button Content="Start Salg" Command="{Binding Path=GoToSaleAsync}" HorizontalAlignment="Left" Margin="93,182,0,0" VerticalAlignment="Top" Height="35" Width="105" Click="Sale_Button_Click"/>
-        <Button Content="Lejer" HorizontalAlignment="Left" Margin="323,182,0,0" VerticalAlignment="Top" Height="35" Width="105"/>
+        <Button Content="Lejer" HorizontalAlignment="Left" Margin="323,182,0,0" VerticalAlignment="Top" Height="35" Width="105" Click="Button_Click"/>
         <Button Content="Udlejning" HorizontalAlignment="Left" Margin="555,182,0,0" VerticalAlignment="Top" Height="35" Width="105"/>
     </Grid>
 </Window>

@@ -16,17 +16,17 @@ using System.IO;
 
 namespace Reolmarkedet.Models
 {
-    public class SaleRepository
+    public class SaleRepository : BaseRepositoryInterface
     {
-        private IConfiguration _configuration;
-        private string _connectionString;
+        //private IConfiguration _configuration;
+        //private string _connectionString;
 
-        private List<Sale> saleList = new List<Sale>();
+        private List<Sale> _saleList = new List<Sale>();
 
         public SaleRepository() 
         {
-            _configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            _connectionString = _configuration.GetConnectionString("MyDBConnection");
+            //_configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            //_connectionString = _configuration.GetConnectionString("MyDBConnection");
         }
 
         public Sale Add(double totalPrice)
@@ -49,7 +49,8 @@ namespace Reolmarkedet.Models
                     throw (new ArgumentException("Not all arguemtns are valid"));
                 }
 
-                using (SqlConnection con =  new SqlConnection(_connectionString))
+
+                using (SqlConnection con =  new SqlConnection(BaseRepositoryInterface._connectionString))
                 {
                     con.Open();
                     SqlCommand cmd = new SqlCommand("INSERT INTO SALE(SoldDate, TotalPrice)" 
@@ -57,7 +58,8 @@ namespace Reolmarkedet.Models
                     cmd.Parameters.Add("@SoldDate", SqlDbType.DateTime2).Value = result.SoldDate;
                     cmd.Parameters.Add("@TotalPrice", SqlDbType.Float).Value = result.TotalPrice;
                     result.ID = Convert.ToInt32(cmd.ExecuteScalar());
-                    this.saleList.Add(result);
+                    this._saleList.Add(result);
+                    con.Close();
                 }
 
 
@@ -85,7 +87,7 @@ namespace Reolmarkedet.Models
         {
             try
             {
-                using (SqlConnection con = new(_connectionString))
+                using (SqlConnection con = new(BaseRepositoryInterface._connectionString))
                 {
                     con.Open();
                     SqlCommand cmd = new SqlCommand("UPDATE SALE SET TotalPrice = @totalPrice WHERE ID = @id", con);

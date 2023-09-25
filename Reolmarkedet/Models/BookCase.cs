@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace Reolmarkedet.Models
     public class BookCase
     {
         public int ID { get; set; }
-        public BookCaseType BookCaseType { get; set; }
+        public BookCaseType _bookCaseType { get; set; }
 
 
     }

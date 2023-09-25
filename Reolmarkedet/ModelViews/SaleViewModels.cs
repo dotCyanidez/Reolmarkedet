@@ -27,21 +27,41 @@ namespace Reolmarkedet.ModelViews
         private double priceLabel = 12.4;
 
         public ICommand AddItemCommand { get; }
+        public ICommand EndSaleCommand { get; }
         public SaleViewModels()
         {
             Title = "Salg";
             Sale = _saleRepository.Add(0);
             AddItemCommand = new AddItemCommand();
+            EndSaleCommand = new EndSaleCommand();
         }
 
 
         public void AddSaleItem(int barcode, double price) 
         {
             //Her skal tilføjes noget der tjekker på om der eksistere en udlejning hvor id = barcode
-            SalesItem item = new SalesItem( barcode, price);
-            Items.Add(item);
+            try
+            {
+                SalesItem item = new SalesItem(barcode, price);
+                Items.Add(item);
 
-            Sale.TotalPrice += item.Price;
+                Sale.TotalPrice += item.Price;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        // tilføj så EndSale også tilføjer beløb til de gældende udlejninger og tilføjer til Genstandscounter
+        public void EndSale()
+        {
+            Items.Clear();
+            _saleRepository.UpdateSale(Sale);
+
         }
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reolmarkedet.ModelViews;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,11 @@ namespace Reolmarkedet.Views
     /// </summary>
     public partial class Lejer : Window
     {
+        
         public Lejer()
         {
             InitializeComponent();
+            
         }
     }
 }

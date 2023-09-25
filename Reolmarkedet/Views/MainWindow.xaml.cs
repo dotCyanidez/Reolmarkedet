@@ -37,5 +37,11 @@ namespace Reolmarkedet.Views
             s.Show();
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Lejer l = new();
+            l.Show();
+        }
     }
 }
