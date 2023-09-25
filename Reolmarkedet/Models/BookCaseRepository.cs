@@ -55,7 +55,7 @@ namespace Reolmarkedet.Models
                 using (SqlConnection con = new SqlConnection(BaseRepositoryInterface._connectionString))
                 {
                     con.Open();
-                    SqlCommand cmd = new SqlCommand("DELETE BOOKCASE WHERE ID = @id");
+                    SqlCommand cmd = new SqlCommand("DELETE BOOKCASE WHERE ID = @id", con);
                     cmd.Parameters.Add("@id", SqlDbType.Int).Value = bookCase.ID;
                     con.Close();
                 }
@@ -80,7 +80,7 @@ namespace Reolmarkedet.Models
                         while (dr.Read())
                         {
                             BookCase bookCase = new();
-                            bookCase.ID = Convert.ToInt32(dr["ID"]);
+                            bookCase.ID = Convert.ToInt32(dr[nameof(bookCase.ID)]);
                             bookCase._bookCaseType =(BookCaseType)Convert.ToInt32(dr[nameof(BookCaseType)]);
                             _bookCases.Add(bookCase);
                         }
