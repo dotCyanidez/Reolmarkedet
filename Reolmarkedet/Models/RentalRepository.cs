@@ -14,9 +14,9 @@ namespace Reolmarkedet.Models
     {
         private ObservableCollection<Rental> _rentals = new();
         public RentalRepository() { }
-        private Rental _tempRental = new();
 
-
+        // hvis evt reol ID for de gældende reoler skal vises så der kan laves stregkoder til dem
+        // så skal AddRental bare laves om fra void til evt List<BookCase> og sendes til viewmodel
         public void AddRental(DateTime startDate, DateTime finalDate, int tenantID,
             List<BookCase> bookCases)
         {
@@ -28,89 +28,12 @@ namespace Reolmarkedet.Models
             rental.ThingsSoldCounter = default;
             rental.TotalAmountSoldFor = default;
             rental.TenantID = tenantID;
-            //List<BookCase> BookCasesFromDB = new();
             BookCaseRepository bookCaseRepository = new BookCaseRepository();
             List<BookCase> bookCasesForReservation = new List<BookCase>();
             
-            //try
-            //{
-            //    // hvis start datoen for udlejningen er før dagen før så er den ikke gyldig og kaster derfor
-            //    // en argument exception
-            //    if (rental.StartDate < DateTime.Now - ts) 
-            //    {
-            //        throw new ArgumentException("Start dato kan ikke være før idag.");
-            //    } // ellers hvis udlejningens slut dato er før startdatoen så kaster den også en exception
-            //    else if (rental.FinalDate < rental.StartDate)
-            //    {
-            //        throw new ArgumentException("Slut dato kan ikke være før start dato");
-            //    }
-            //    // hvis der ikke er nogen reoler i udlejningen, så kaster den en exception
-            //    if (bookCases.IsNullOrEmpty())
-            //    {
-            //        throw new ArgumentException("en udlejning skal indeholde reoler, aflåste skabe eller hylder i aflåste skabe");
-            //    }
-
-
-            //    using (SqlConnection con = new SqlConnection(BaseRepositoryInterface._connectionString))
-            //    {
-            //        con.Open();
-            //        // sql query der får alle reoler ud som er ledige i den gældende udlejningens periode
-            //        SqlCommand cmd = new SqlCommand(@"SELECT BC.ID, BC.BookCaseType
-            //                FROM BOOKCASE BC LEFT JOIN
-            //                BOOKCASE_RENTAL BCR ON BC.ID = BCR.BookCaseID 
-            //                LEFT JOIN RENTAL R ON BCR.RENTALID = R.ID 
-            //                WHERE BC.ID NOT IN (
-            //                SELECT BC.ID
-            //                FROM BOOKCASE BC
-            //                INNER JOIN BOOKCASE_RENTAL BCR ON BC.ID = BCR.BookCaseID
-            //                INNER JOIN RENTAL R ON BCR.RENTALID = R.ID
-            //                WHERE (R.StartDate BETWEEN @startDate AND @finalDate)
-            //                OR (R.FinalDate BETWEEN @startDate AND @finalDate))", con);
-            //        cmd.Parameters.Add("@startDate", SqlDbType.DateTime2).Value = rental.StartDate;
-            //        cmd.Parameters.Add("@finalDate", SqlDbType.DateTime2).Value = rental.FinalDate;
-            //        using (SqlDataReader dr = cmd.ExecuteReader())
-            //        {
-            //            while (dr.Read())
-            //            {
-            //                BookCase bc = new BookCase()
-            //                {
-            //                    ID = Convert.ToInt32(dr[nameof(BookCase.ID)]),
-            //                    BookCaseType = (BookCaseType)Convert.ToInt32(dr[nameof(BookCaseType)])
-            //                };
-
-            //                BookCasesFromDB.Add(bc);
-            //            }
-            //        }
-
-            //        con.Close();
-            //        // hvis der ikke er nogle reoler i bookcasesfromdb så er der ikke nogen ledige
-            //        // reoler i den gældende udlejnings periode
-            //        if (BookCasesFromDB.IsNullOrEmpty())
-            //        {
-            //            throw new ArgumentException("der er intet ledigt på for den valgte lejeperiode");
-            //        }
-
-            //    }
-            //} // hvis der er kastet en exception så bliver den fanget her og bliver kastet som en ny exception 
-            //catch (Exception e)
-            //{
-            //    throw new Exception(e.Message);
-            //}
-            ////  giver reolerne en ID så de matcher i databasen og  samtidigt checker om der er nok reoler ledige
-            //// til den givne udlejning
-            //foreach (BookCase bookCase in bookCases)
-            //{
-            //    bookCase.ID = BookCasesFromDB.FirstOrDefault(x => x.BookCaseType == bookCase.BookCaseType).ID;
-            //    if (bookCase.ID == default)
-            //    {
-            //        throw new ArgumentException("Der er ikke nok ledige reoler af typen"
-            //            +$" {bookCase.BookCaseType} ledige i den valgte periode");
-            //    }
-            //}
-
-
             try
             {
+                // finder ledige reoler (bookCases) som skal reserveres til den gældende udlejning
                 bookCasesForReservation = bookCaseRepository.FindAvailableBookCases(rental.StartDate,rental.FinalDate, bookCases);
                 using (SqlConnection con = new SqlConnection(BaseRepositoryInterface._connectionString))
                 {
@@ -130,6 +53,7 @@ namespace Reolmarkedet.Models
                     rental.ID = Convert.ToInt32(cmd.ExecuteScalar());
                     _rentals.Add(rental);
                     con.Close();
+                    // reservere de valgte reoler (bookCases)
                     bookCaseRepository.ReserveBookCases(bookCasesForReservation, rental.ID);
                 }
             }
@@ -137,33 +61,7 @@ namespace Reolmarkedet.Models
             {
 
                 throw new Exception(e.Message);
-            }
-
-            //foreach (BookCase bookCase in bookCases)
-            //{
-            //    try
-            //    {
-            //        using (SqlConnection con = new SqlConnection(BaseRepositoryInterface._connectionString))
-            //        {
-            //            con.Open();
-
-            //            // tilføjer relationen mellem reol og den gældende udlejning sådan at
-            //            // andre ikke kan leje dem i samme periode
-            //            SqlCommand cmd = new SqlCommand("INSERT INTO BOOKCASE_RENTAL(BookCaseID, RENTALID)"
-            //                + "VALUES(@bookCaseID,@rentalID)", con);
-            //            cmd.Parameters.Add("@bookCaseID", SqlDbType.Int).Value = bookCase.ID;
-            //            cmd.Parameters.Add("@rentalID", SqlDbType.Int).Value = rental.ID;
-            //            cmd.ExecuteNonQuery();
-            //            con.Close();
-            //        }
-            //    }
-            //    catch (Exception e)
-            //    {
-
-            //        throw new Exception(e.Message);
-            //    }
-            //}
-
+            }           
         }
 
 
