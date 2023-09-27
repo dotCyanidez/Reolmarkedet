@@ -12,9 +12,9 @@ namespace Reolmarkedet.ModelViews
     public partial class BaseViewModels : ObservableObject
     {
         //til test af rental repo
-        //private RentalRepository rentalrepo = new();
-        //private ObservableCollection<BookCase> bookCases = new ObservableCollection<BookCase>() 
-        //{ 
+        private RentalRepository _rentalrepo = new();
+        //private ObservableCollection<BookCase> bookCases = new ObservableCollection<BookCase>()
+        //{
         //    new BookCase() { BookCaseType = BookCaseType.ThingsBookCase },
         //    new BookCase() { BookCaseType = BookCaseType.ClothBookCase },
         //    new BookCase() { BookCaseType = BookCaseType.LockedCabin }
@@ -24,8 +24,10 @@ namespace Reolmarkedet.ModelViews
         public BaseViewModels() 
         {
 
-            // til test af rental repo
-            //rentalrepo.AddRental(DateTime.Now, this.dt, 1, bookCases.ToList());
+             //til test af rental repo
+            //_rentalrepo.AddRental(DateTime.Now, this.dt, 1, bookCases.ToList());
+            // til test af DeleteRental Metoden
+            //_rentalrepo.DeleteRental(8);
             Title = "ReolMarkedet";
         }
 
@@ -36,7 +38,7 @@ namespace Reolmarkedet.ModelViews
         [ObservableProperty]
         string title;
 
-        bool IsNotBusy => !isBusy;
+        bool IsNotBusy => !IsBusy;
 
 
 

@@ -18,7 +18,8 @@ namespace Reolmarkedet.Models
 
         public void AddTenant(string name, string contactNr, string email)
         {
-            Tenant tenant = new(name,contactNr,email);
+            //Tenant tenant = new(name,contactNr,email);
+            Tenant tenant = new() { Name = name, ContactNr = contactNr, Email = email };
 
             try
             {
@@ -101,11 +102,14 @@ namespace Reolmarkedet.Models
                         while (reader.Read())
                         {                   // skal muligvis lave en constructor der tager færre parameters
                             Tenant tenant = new( 
-                                reader[nameof(tenant.Name)].ToString(),
-                                reader[nameof(tenant.ContactNr)].ToString(),
-                                reader[nameof(tenant.Email)].ToString()
+                                //reader[nameof(tenant.Name)].ToString(),
+                                //reader[nameof(tenant.ContactNr)].ToString(),
+                                //reader[nameof(tenant.Email)].ToString()
                                 );
                             tenant.ID = Convert.ToInt32(reader[nameof(tenant.ID)]);
+                            tenant.Name = reader[nameof(tenant.Name)].ToString();
+                            tenant.ContactNr = reader[nameof(tenant.ContactNr)].ToString();
+                            tenant.Email = reader[nameof(tenant.Email)].ToString();
                             _tenants.Add(tenant);
                         }
                     }

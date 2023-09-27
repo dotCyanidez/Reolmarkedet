@@ -14,6 +14,8 @@ namespace Reolmarkedet.Models
     {
         private ObservableCollection<Rental> _rentals = new();
         public RentalRepository() { }
+        private BookCaseRepository _bookCaseRepository = new BookCaseRepository();
+        
 
         // hvis evt reol ID for de gældende reoler skal vises så der kan laves stregkoder til dem
         // så skal AddRental bare laves om fra void til evt List<BookCase> og sendes til viewmodel
@@ -28,13 +30,12 @@ namespace Reolmarkedet.Models
             rental.ThingsSoldCounter = default;
             rental.TotalAmountSoldFor = default;
             rental.TenantID = tenantID;
-            BookCaseRepository bookCaseRepository = new BookCaseRepository();
             List<BookCase> bookCasesForReservation = new List<BookCase>();
-            
+
             try
             {
                 // finder ledige reoler (bookCases) som skal reserveres til den gældende udlejning
-                bookCasesForReservation = bookCaseRepository.FindAvailableBookCases(rental.StartDate,rental.FinalDate, bookCases);
+                bookCasesForReservation = _bookCaseRepository.FindAvailableBookCases(rental.StartDate, rental.FinalDate, bookCases);
                 using (SqlConnection con = new SqlConnection(BaseRepositoryInterface._connectionString))
                 {
                     con.Open();
@@ -54,14 +55,14 @@ namespace Reolmarkedet.Models
                     _rentals.Add(rental);
                     con.Close();
                     // reservere de valgte reoler (bookCases)
-                    bookCaseRepository.ReserveBookCases(bookCasesForReservation, rental.ID);
+                    _bookCaseRepository.ReserveBookCases(bookCasesForReservation, rental.ID);
                 }
             }
             catch (Exception e)
             {
 
                 throw new Exception(e.Message);
-            }           
+            }
         }
 
 
@@ -105,6 +106,29 @@ namespace Reolmarkedet.Models
         {
             Rental tempRental = _rentals.FirstOrDefault(x => x.ID == id);
             return tempRental != null ? tempRental : throw new Exception("Den valgte rental eksisterer ikke");
+        }
+
+        public void DeleteRental(int id)
+        {
+            try
+            {
+                _bookCaseRepository.DeleteReservationForBookCasesForThisRental(id);
+                using (SqlConnection con = new SqlConnection(BaseRepositoryInterface._connectionString))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("DELETE FROM RENTAL WHERE ID = @id;", con);
+                    cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+                // skal kun sættes til hvis vi vælger at loade alle rentals inden vi sletter en
+                //_rentals.Remove(_rentals.First(x => x.ID == id));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+
+            }
         }
     }
 }
