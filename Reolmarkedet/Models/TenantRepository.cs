@@ -87,7 +87,7 @@ namespace Reolmarkedet.Models
                 throw new Exception(e.Message);
             }
         }
-
+        
         public async void GetAllTenants()
         {
             try
@@ -99,8 +99,8 @@ namespace Reolmarkedet.Models
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
-                        {
-                            Tenant tenant = new(
+                        {                   // skal muligvis lave en constructor der tager færre parameters
+                            Tenant tenant = new( 
                                 reader[nameof(tenant.Name)].ToString(),
                                 reader[nameof(tenant.ContactNr)].ToString(),
                                 reader[nameof(tenant.Email)].ToString()

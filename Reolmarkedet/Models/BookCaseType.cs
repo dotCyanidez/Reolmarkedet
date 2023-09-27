@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 public enum BookCaseType
 {
-    ThingsBookCase, ClothBookCase
+    ThingsBookCase, ClothBookCase, LockedCabin, ShelfInALockedCabin
 }

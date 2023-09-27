@@ -14,5 +14,6 @@ namespace Reolmarkedet.Models
         public int ThingsSoldCounter { get; set; }
         public double TotalAmountSoldFor { get; set; }
         public Boolean Settled { get; set; }
+        public int TenantID { get; set; }
     }
 }

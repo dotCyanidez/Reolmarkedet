@@ -10,7 +10,7 @@ namespace Reolmarkedet.Models
     public class BookCase
     {
         public int ID { get; set; }
-        public BookCaseType _bookCaseType { get; set; }
+        public BookCaseType BookCaseType { get; set; }
 
 
     }
