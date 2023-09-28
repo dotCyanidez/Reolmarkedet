@@ -4,12 +4,46 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Reolmarkedet"
+        xmlns:viewmodels="clr-namespace:Reolmarkedet.ModelViews"
+        xmlns:views="clr-namespace:Reolmarkedet.Views"
         mc:Ignorable="d"
         Title="{Binding Title}" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate x:Name="OpretSalgTemplate" DataType="{x:Type viewmodels:SaleViewModels}">
+            <views:OpretSalg DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="OpretLejerTemplate" DataType="{x:Type viewmodels:TenantViewModel}">
+            <views:OpretLejer DataContext="{Binding}"/>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="22,10,0,0" VerticalAlignment="Top"/>
-        <Button Content="Start Salg" Command="{Binding Path=GoToSaleAsync}" HorizontalAlignment="Left" Margin="93,182,0,0" VerticalAlignment="Top" Height="35" Width="105" Click="Sale_Button_Click"/>
-        <Button Content="Lejer" HorizontalAlignment="Left" Margin="323,182,0,0" VerticalAlignment="Top" Height="35" Width="105" Click="Button_Click"/>
-        <Button Content="Udlejning" HorizontalAlignment="Left" Margin="555,182,0,0" VerticalAlignment="Top" Height="35" Width="105"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Content="Label" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center"/>
+        <DockPanel Background="Gray" Grid.Row="0" Grid.Column="0" Grid.RowSpan="5">
+            <StackPanel>
+                <Button Content="Start Salg" Height="35" Width="105" Click="StartSalg_Clicked" />
+                <Button Content="Opret lejer" Height="35" Width="105" Click="OpretLejer_Clicked" />
+                <Button Content="Opdater lejer" Height="35" Width="105"  />
+                <Button Content="Slet lejer" Height="35" Width="105"  />
+                <Button Content="Opret Udlejning" Height="35" Width="105"/>
+                <Button Content="Opdater Udlejning" Height="35" Width="105"/>
+                <Button Content="Slet Udlejning" Height="35" Width="105"/>
+            </StackPanel>
+        </DockPanel>
+        
+        <ContentControl Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="5" Content="{Binding}"/>
     </Grid>
 </Window>

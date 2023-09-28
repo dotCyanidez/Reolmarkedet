@@ -12,7 +12,7 @@ namespace Reolmarkedet.ModelViews
     public partial class BaseViewModels : ObservableObject
     {
         //til test af rental repo
-        private RentalRepository _rentalrepo = new();
+        //private RentalRepository _rentalrepo = new();
         //private ObservableCollection<BookCase> bookCases = new ObservableCollection<BookCase>()
         //{
         //    new BookCase() { BookCaseType = BookCaseType.ThingsBookCase },
@@ -24,11 +24,11 @@ namespace Reolmarkedet.ModelViews
         public BaseViewModels() 
         {
 
-             //til test af rental repo
+            //til test af rental repo
             //_rentalrepo.AddRental(DateTime.Now, this.dt, 1, bookCases.ToList());
-            // til test af DeleteRental Metoden
-            //_rentalrepo.DeleteRental(8);
-            Title = "ReolMarkedet";
+            //til test af DeleteRental Metoden
+           //_rentalrepo.DeleteRental(8);
+           Title = "ReolMarkedet";
         }
 
         [ObservableProperty]

@@ -12,7 +12,7 @@ namespace Reolmarkedet.Models
         public int ID { get; set; }
         public DateTime SoldDate { get; set; }
         [ObservableProperty]
-        private double _totalPrice;
+        private decimal _totalPrice;
 
     }
 }

@@ -104,8 +104,10 @@ namespace Reolmarkedet.Models
 
         public Rental GetRental(int id)
         {
+            GetAllRentals();
             Rental tempRental = _rentals.FirstOrDefault(x => x.ID == id);
-            return tempRental != null ? tempRental : throw new Exception("Den valgte rental eksisterer ikke");
+            //return tempRental != null ? tempRental : throw new Exception("Den valgte rental eksisterer ikke");
+            return tempRental;
         }
 
         public void DeleteRental(int id)
@@ -128,6 +130,32 @@ namespace Reolmarkedet.Models
             {
                 throw new Exception(e.Message);
 
+            }
+        }
+
+        public void UpdateRentalToAddSales(int id, decimal amount)
+        {
+            Rental tempRental = GetRental(id);
+            try
+            {
+                using (SqlConnection con = new SqlConnection(BaseRepositoryInterface._connectionString))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("UPDATE RENTAL SET "
+                        +"ThingsSoldCounter = @thingsSoldCounter, TotalAmountSoldFor = @totalAmountSoldFor "
+                        +"WHERE ID = @id", con);
+                    cmd.Parameters.Add("@thingsSoldCounter", SqlDbType.Int).Value = tempRental.ThingsSoldCounter +1;
+                    cmd.Parameters.Add("@totalAmountSoldFor", SqlDbType.Float).Value = Convert.ToDecimal(tempRental.TotalAmountSoldFor) + amount;
+                    cmd.Parameters.Add("@id", SqlDbType.Int).Value = tempRental.ID;
+                    cmd.ExecuteNonQuery();
+
+                    con.Close();
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
             }
         }
     }

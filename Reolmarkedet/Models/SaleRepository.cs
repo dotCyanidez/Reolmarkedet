@@ -29,7 +29,7 @@ namespace Reolmarkedet.Models
             //_connectionString = _configuration.GetConnectionString("MyDBConnection");
         }
 
-        public Sale Add(double totalPrice)
+        public Sale Add(decimal totalPrice)
         {
             Sale result;
             try

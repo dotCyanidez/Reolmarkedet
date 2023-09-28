@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace Reolmarkedet.Models
 {
@@ -89,13 +90,13 @@ namespace Reolmarkedet.Models
             }
         }
         
-        public async void GetAllTenants()
+        public ObservableCollection<Tenant> GetAllTenants()
         {
             try
             {
                 using (SqlConnection con = new SqlConnection(BaseRepositoryInterface._connectionString))
                 {
-                    await con.OpenAsync();
+                    con.Open();
                     SqlCommand cmd = new SqlCommand("SELECT ID, Name, ContactNr, Email FROM TENANT", con);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -113,7 +114,7 @@ namespace Reolmarkedet.Models
                             _tenants.Add(tenant);
                         }
                     }
-                    await con.CloseAsync();
+                    con.Close();
                 }
             }
             catch (Exception e)
@@ -121,6 +122,7 @@ namespace Reolmarkedet.Models
 
                 throw new Exception(e.Message);
             }
+            return _tenants;
         }
 
         public Tenant GetTenant(int id)

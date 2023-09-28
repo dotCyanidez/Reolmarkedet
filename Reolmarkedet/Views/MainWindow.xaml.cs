@@ -24,24 +24,48 @@ namespace Reolmarkedet.Views
     public partial class MainWindow : Window
     {
 
-        BaseViewModels bvm = new();
+        
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = bvm;
+            
         }
 
-        private void Sale_Button_Click(object sender, RoutedEventArgs e)
+        private void OpretLejer_Clicked(object sender, RoutedEventArgs e)
         {
-            Salg s = new();
-            s.Show();
-
+            DataContext = new TenantViewModel();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void StartSalg_Clicked(object sender, RoutedEventArgs e)
         {
-            Lejer l = new();
-            l.Show();
+            DataContext = new SaleViewModels();
         }
+
+        //private void Create_Sale_Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Salg s = new();
+        //    s.Show();
+
+        //}
+
+
+
+        //private void Create_Tenant_Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //OpretLejer Ol = new();
+        //Ol.Show();
+        //}
+
+        //private void Update_Tenant_Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    OpretLejer Ol = new();
+        //    Ol.Show();
+        //}
+
+        //private void Delete_Tenant_Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    OpretLejer Ol = new();
+        //    Ol.Show();
+        //}
     }
 }

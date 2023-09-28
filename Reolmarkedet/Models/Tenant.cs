@@ -20,5 +20,10 @@ namespace Reolmarkedet.Models
         //    Email = email;
         //}
 
+        public override string ToString()
+        {
+            return $"Navn: {Name} Nr:{ContactNr}\n Email: {Email}";
+        }
+
     }
 }
