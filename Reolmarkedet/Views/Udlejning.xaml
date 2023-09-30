@@ -29,25 +29,27 @@
         </DockPanel>
         <StackPanel  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="5">
             <Label Content="lejere:" FontSize="16"/>
-            <ListBox ItemsSource="{Binding Rentals}" SelectedValue="{Binding SelectedRental}" FontSize="16" Height="350">
+            <ListBox ItemsSource="{Binding RentalVMs}" SelectedValue="{Binding SelectedRentalVM}" FontSize="16" Height="350">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Margin="10">
-                            <TextBlock Text="{Binding StartDate, StringFormat='{}{0:dd/MM/yyyy}'}"/>
-                            <TextBlock Text="{Binding FinalDate, StringFormat='{}{0:dd/MM/yyyy}'}"/>
-                            <TextBlock Text="{Binding TenantID}"/>
+                            <TextBlock Text="{Binding Rental.StartDate, StringFormat=Start dato: {0:dd/MM/yyyy}}"/>
+                            <TextBlock Text="{Binding Rental.FinalDate, StringFormat=Slut dato:  {0:dd/MM/yyyy}}"/>
+                            <TextBlock Text="{Binding Tenant.Name, StringFormat=Navn: {0}}"/>
+                            <TextBlock Text="{Binding Tenant.ContactNr, StringFormat=Tlf: {0}}"/>
+                            <TextBlock Text="{Binding Tenant.Email, StringFormat=Email: {0}}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="4">
-            <Label Content="Start dato" FontSize="16" Height="35"/>
-            <DatePicker SelectedDateFormat="Short" SelectedDate="{Binding SelectedRental.StartDate}" />
-            <Label Content="Slut dato" FontSize="16" Height="35"/>
-            <DatePicker SelectedDateFormat="Short" SelectedDate="{Binding SelectedRental.FinalDate}" />
-            <Label Content="Lejer" FontSize="16" Height="35"/>
-            <ComboBox ItemsSource="{Binding Tenants}" SelectedValue="{Binding SelectedTenant}">
+        <StackPanel Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="3">
+            <Label Content="Start dato" FontSize="16" Height="30"/>
+            <DatePicker SelectedDateFormat="Short" SelectedDate="{Binding SelectedRentalVM.Rental.StartDate}" />
+            <Label Content="Slut dato" FontSize="16" Height="30"/>
+            <DatePicker SelectedDateFormat="Short" SelectedDate="{Binding SelectedRentalVM.Rental.FinalDate}" />
+            <Label Content="Lejer" FontSize="16" Height="30"/>
+            <ComboBox ItemsSource="{Binding Tenants}" SelectedValue="{Binding SelectedRentalVM.Tenant}" >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Margin="10">
@@ -58,6 +60,31 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+            </StackPanel>
+        <StackPanel Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="1" Margin="10" >
+            <Label Content="Skriv antal for hver felt:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="40"/>
+        </StackPanel>
+        <StackPanel  Grid.Column="3" Grid.ColumnSpan="1" Grid.Row="3" Grid.RowSpan="3" Margin="5">
+            <StackPanel Grid.RowSpan="1" Margin="10">
+                <Label Content="Ting Reoler:" FontSize="12" />
+                <TextBox Height="35" FontSize="16" Text="{Binding ThingBookCases}" />
+            </StackPanel>
+            <StackPanel Grid.RowSpan="1" Margin="10">
+                <Label Content="Aflåste skabe:" FontSize="12" />
+                <TextBox Height="35" FontSize="16" Text="{Binding LockedCabinBookCases}" />
+            </StackPanel>
+
+        </StackPanel>
+        <StackPanel  Grid.Column="4" Grid.ColumnSpan="1" Grid.Row="3" Grid.RowSpan="3" Margin="5">
+            <StackPanel Grid.RowSpan="1" Margin="10">
+                <Label Content="Tøj reoler:" FontSize="12" />
+                <TextBox Height="35" FontSize="16" Text="{Binding ClothBookCases}" />
+            </StackPanel>
+            <StackPanel Grid.RowSpan="1" Margin="10">
+                <Label Content="Aflåst hylde:" FontSize="12" />
+                <TextBox Height="35" FontSize="16" Text="{Binding ShelfInALockedCabinBookCases}" />
+            </StackPanel>
+
         </StackPanel>
     </Grid>
 </UserControl>

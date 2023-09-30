@@ -15,5 +15,10 @@ namespace Reolmarkedet.Models
         public double TotalAmountSoldFor { get; set; }
         public Boolean Settled { get; set; }
         public int TenantID { get; set; }
+
+        public override string ToString()
+        {
+            return $"{StartDate} --- {FinalDate}";
+        }
     }
 }

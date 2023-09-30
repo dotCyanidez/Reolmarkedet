@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reolmarkedet.ModelViews;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,10 @@ namespace Reolmarkedet.Commands
     {
         public override void Execute(object? parameter)
         {
-            throw new NotImplementedException();
+            if (parameter is RentalViewModel rvm)
+            {
+
+            };
         }
     }
 }
