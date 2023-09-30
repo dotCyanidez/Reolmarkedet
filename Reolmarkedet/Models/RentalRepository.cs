@@ -160,5 +160,26 @@ namespace Reolmarkedet.Models
                 throw new Exception(e.Message);
             }
         }
+
+        public void SettleRental(int id)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(BaseRepositoryInterface._connectionString))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("UPDATE RENTAL SET Settled = @settled WHERE ID = @id", con);
+                    cmd.Parameters.Add("@settled", SqlDbType.Bit).Value = true;
+                    cmd.Parameters.Add("@id", SqlDbType.Int).Value =id;
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

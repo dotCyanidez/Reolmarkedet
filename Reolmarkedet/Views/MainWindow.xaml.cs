@@ -46,6 +46,11 @@ namespace Reolmarkedet.Views
             DataContext = new RentalViewModel();
         }
 
+        private void AfregnUdlejning_Clicked(object sender, RoutedEventArgs e)
+        {
+            DataContext = new SettleRentalViewModel();
+        }
+
         //private void Create_Sale_Button_Click(object sender, RoutedEventArgs e)
         //{
         //    Salg s = new();

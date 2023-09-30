@@ -18,6 +18,9 @@
         <DataTemplate x:Name="UdlejningTemplate" DataType="{x:Type viewmodels:RentalViewModel}">
             <views:Udlejning DataContext="{Binding}"/>
         </DataTemplate>
+        <DataTemplate x:Name="AfregnUdlejningTemplate" DataType="{x:Type viewmodels:SettleRentalViewModel}">
+            <views:AfregnUdlejninger DataContext="{Binding}"/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -39,6 +42,7 @@
                 <Button Content="Start Salg" Height="35" Width="105" Margin="5,5,5,5" Click="StartSalg_Clicked" />
                 <Button Content="lejer" Height="35" Width="105" Margin="5,5,5,5" Click="Lejer_Clicked" />
                 <Button Content="Udlejning" Height="35" Margin="5,5,5,5" Width="105" Click="Udlejning_Clicked"/>
+                <Button Content="Afregn udlejning" Height="35" Margin="5,5,5,5" Width="105" Click="AfregnUdlejning_Clicked"/>
             </StackPanel>
         </DockPanel>
         
