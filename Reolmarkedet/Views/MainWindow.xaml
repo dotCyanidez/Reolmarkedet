@@ -12,8 +12,8 @@
         <DataTemplate x:Name="OpretSalgTemplate" DataType="{x:Type viewmodels:SaleViewModels}">
             <views:OpretSalg DataContext="{Binding}"/>
         </DataTemplate>
-        <DataTemplate x:Name="OpretLejerTemplate" DataType="{x:Type viewmodels:TenantViewModel}">
-            <views:OpretLejer DataContext="{Binding}"/>
+        <DataTemplate x:Name="LejerTemplate" DataType="{x:Type viewmodels:TenantViewModel}">
+            <views:Lejer DataContext="{Binding}"/>
         </DataTemplate>
     </Window.Resources>
     <Grid>
@@ -34,13 +34,9 @@
         <Label Content="Label" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center"/>
         <DockPanel Background="Gray" Grid.Row="0" Grid.Column="0" Grid.RowSpan="5">
             <StackPanel>
-                <Button Content="Start Salg" Height="35" Width="105" Click="StartSalg_Clicked" />
-                <Button Content="Opret lejer" Height="35" Width="105" Click="OpretLejer_Clicked" />
-                <Button Content="Opdater lejer" Height="35" Width="105"  />
-                <Button Content="Slet lejer" Height="35" Width="105"  />
-                <Button Content="Opret Udlejning" Height="35" Width="105"/>
-                <Button Content="Opdater Udlejning" Height="35" Width="105"/>
-                <Button Content="Slet Udlejning" Height="35" Width="105"/>
+                <Button Content="Start Salg" Height="35" Width="105" Margin="5,5,5,5" Click="StartSalg_Clicked" />
+                <Button Content="lejer" Height="35" Width="105" Margin="5,5,5,5" Click="Lejer_Clicked" />
+                <Button Content="Udlejning" Height="35" Margin="5,5,5,5" Width="105"/>
             </StackPanel>
         </DockPanel>
         

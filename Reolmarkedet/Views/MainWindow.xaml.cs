@@ -31,7 +31,7 @@ namespace Reolmarkedet.Views
             
         }
 
-        private void OpretLejer_Clicked(object sender, RoutedEventArgs e)
+        private void Lejer_Clicked(object sender, RoutedEventArgs e)
         {
             DataContext = new TenantViewModel();
         }

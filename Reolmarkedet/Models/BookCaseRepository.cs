@@ -174,7 +174,9 @@ namespace Reolmarkedet.Models
                 {
                     try
                     {
-                        bookCase.ID = BookCasesFromDB.FirstOrDefault(x => x.BookCaseType == bookCase.BookCaseType).ID;
+                        BookCase temp = BookCasesFromDB.FirstOrDefault(x => x.BookCaseType == bookCase.BookCaseType);
+                        bookCase.ID = temp.ID;
+                        BookCasesFromDB.Remove(temp);
                         if (bookCase.ID == default)
                         {
                             throw new ArgumentException("Der er ikke nok ledige reoler af typen: "

@@ -15,9 +15,9 @@ namespace Reolmarkedet.ModelViews
         //private RentalRepository _rentalrepo = new();
         //private ObservableCollection<BookCase> bookCases = new ObservableCollection<BookCase>()
         //{
-        //    new BookCase() { BookCaseType = BookCaseType.ThingsBookCase },
         //    new BookCase() { BookCaseType = BookCaseType.ClothBookCase },
-        //    new BookCase() { BookCaseType = BookCaseType.LockedCabin }
+        //    new BookCase() { BookCaseType = BookCaseType.ClothBookCase },
+        //    new BookCase() { BookCaseType = BookCaseType.ClothBookCase }
         //};
         //private DateTime dt = new DateTime(2023, 10, 16);
 
@@ -27,8 +27,8 @@ namespace Reolmarkedet.ModelViews
             //til test af rental repo
             //_rentalrepo.AddRental(DateTime.Now, this.dt, 1, bookCases.ToList());
             //til test af DeleteRental Metoden
-           //_rentalrepo.DeleteRental(8);
-           Title = "ReolMarkedet";
+            //_rentalrepo.DeleteRental(8);
+            Title = "ReolMarkedet";
         }
 
         [ObservableProperty]

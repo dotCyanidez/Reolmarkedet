@@ -11,21 +11,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Reolmarkedet.Views
 {
     /// <summary>
-    /// Interaction logic for Salg.xaml
+    /// Interaction logic for Lejer.xaml
     /// </summary>
-    public partial class Salg : Window
+    public partial class Lejer : UserControl
     {
-
-        SaleViewModels svm = new();
-        public Salg()
+        public Lejer()
         {
             InitializeComponent();
-            DataContext = svm;
         }
     }
 }

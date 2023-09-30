@@ -72,7 +72,7 @@ namespace Reolmarkedet.Models
                 using (SqlConnection con = new SqlConnection(BaseRepositoryInterface._connectionString))
                 {
                     con.Open();
-                    SqlCommand cmd = new SqlCommand("UPDATE SALE SET"
+                    SqlCommand cmd = new SqlCommand("UPDATE TENANT SET"
                         + " Name = @name, ContactNr = @contactNr, Email = @email"
                         + " WHERE ID = @id", con);
                     cmd.Parameters.Add("@name", SqlDbType.NVarChar).Value = tenant.Name;
