@@ -28,7 +28,7 @@
             </StackPanel>
         </DockPanel>
         <StackPanel  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="5">
-            <Label Content="lejere:" FontSize="16"/>
+            <Label Content="Udlejninger:" FontSize="16"/>
             <ListBox ItemsSource="{Binding RentalVMs}" SelectedValue="{Binding SelectedRentalVM}" FontSize="16" Height="350">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -43,7 +43,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </StackPanel>
-        <StackPanel Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="3">
+        <StackPanel Grid.Row="0" Grid.Column="3" Margin="5" Grid.ColumnSpan="2" Grid.RowSpan="3">
             <Label Content="Start dato" FontSize="16" Height="30"/>
             <DatePicker SelectedDateFormat="Short" SelectedDate="{Binding SelectedRentalVM.Rental.StartDate}" />
             <Label Content="Slut dato" FontSize="16" Height="30"/>

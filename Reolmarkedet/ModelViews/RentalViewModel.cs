@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.IdentityModel.Tokens;
 using Reolmarkedet.Commands;
 using Reolmarkedet.Models;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Reolmarkedet.ModelViews
@@ -21,6 +23,10 @@ namespace Reolmarkedet.ModelViews
         // en del af partial class RentalVM
         public ObservableCollection<RentalVM> RentalVMs { get; set; } = new();
 
+        private string _messageBoxText = "";
+        private string _messageBoxCaption = "Noget gik galt";
+        MessageBoxButton button = MessageBoxButton.OK;
+        MessageBoxResult Rvmresult;
 
         [ObservableProperty]
         private List<BookCase> _books;
@@ -118,12 +124,39 @@ namespace Reolmarkedet.ModelViews
             //SelectedRental = Rentals.First();
         }
 
-        public void AddTenant(Rental rental, List<BookCase> bookCases)
+        public bool AddRental(Rental rental, int ThingsBookCases, int ClothBookCases, int LockedCabin, int Shelf)        
         {
-            _rentalRepo.AddRental(rental.StartDate, rental.FinalDate, rental.TenantID, bookCases);
+            List<BookCase> bookCases = new List<BookCase>();
+
+            for (int i = 0; i < ThingsBookCases; i++)
+            {
+                bookCases.Add(new() { BookCaseType = BookCaseType.ThingsBookCase });
+            }
+
+            for (int i = 0; i < ClothBookCases; i++)
+            {
+                bookCases.Add(new() { BookCaseType = BookCaseType.ClothBookCase });
+            }
+            for (int i = 0; i < LockedCabin; i++)
+            {
+                bookCases.Add(new() { BookCaseType = BookCaseType.LockedCabin });
+            }
+            for (int i = 0; i < Shelf; i++)
+            {
+                bookCases.Add(new() { BookCaseType = BookCaseType.ShelfInALockedCabin });
+            }
+
+           _messageBoxText = _rentalRepo.AddRental(rental.StartDate, rental.FinalDate, rental.TenantID, bookCases);
+
+            if (_messageBoxText.Length > 2 )
+            {
+               Rvmresult = MessageBox.Show(_messageBoxText, _messageBoxCaption, button);
+                return false;
+            }
+            return true;
         }
 
-        public void DeleteTenant(Rental rental)
+        public void DeleteRental(Rental rental)
         {
             _rentalRepo.DeleteRental(rental.ID);
         }

@@ -175,7 +175,10 @@ namespace Reolmarkedet.Models
                     try
                     {
                         BookCase temp = BookCasesFromDB.FirstOrDefault(x => x.BookCaseType == bookCase.BookCaseType);
-                        bookCase.ID = temp.ID;
+                        if (temp != null)
+                        {
+                            bookCase.ID = temp.ID;
+                        }
                         BookCasesFromDB.Remove(temp);
                         if (bookCase.ID == default)
                         {

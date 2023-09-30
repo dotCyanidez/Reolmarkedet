@@ -19,7 +19,7 @@ namespace Reolmarkedet.Models
 
         // hvis evt reol ID for de gældende reoler skal vises så der kan laves stregkoder til dem
         // så skal AddRental bare laves om fra void til evt List<BookCase> og sendes til viewmodel
-        public void AddRental(DateTime startDate, DateTime finalDate, int tenantID,
+        public string AddRental(DateTime startDate, DateTime finalDate, int tenantID,
             List<BookCase> bookCases)
         {
             TimeSpan ts = new TimeSpan(1, 0, 0, 0);
@@ -61,8 +61,9 @@ namespace Reolmarkedet.Models
             catch (Exception e)
             {
 
-                throw new Exception(e.Message);
+                return e.Message;
             }
+            return "";
         }
 
 
