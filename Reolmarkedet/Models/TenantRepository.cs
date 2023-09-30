@@ -127,6 +127,7 @@ namespace Reolmarkedet.Models
 
         public Tenant GetTenant(int id)
         {
+            this.GetAllTenants();
             Tenant result = _tenants.FirstOrDefault(x => x.ID == id);
 
             return result == null ? throw new Exception("Lejer ikke fundet") : result;

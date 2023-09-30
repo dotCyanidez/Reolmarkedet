@@ -15,6 +15,9 @@
         <DataTemplate x:Name="LejerTemplate" DataType="{x:Type viewmodels:TenantViewModel}">
             <views:Lejer DataContext="{Binding}"/>
         </DataTemplate>
+        <DataTemplate x:Name="UdlejningTemplate" DataType="{x:Type viewmodels:RentalViewModel}">
+            <views:Udlejning DataContext="{Binding}"/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -31,12 +34,11 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Content="Label" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center"/>
         <DockPanel Background="Gray" Grid.Row="0" Grid.Column="0" Grid.RowSpan="5">
             <StackPanel>
                 <Button Content="Start Salg" Height="35" Width="105" Margin="5,5,5,5" Click="StartSalg_Clicked" />
                 <Button Content="lejer" Height="35" Width="105" Margin="5,5,5,5" Click="Lejer_Clicked" />
-                <Button Content="Udlejning" Height="35" Margin="5,5,5,5" Width="105"/>
+                <Button Content="Udlejning" Height="35" Margin="5,5,5,5" Width="105" Click="Udlejning_Clicked"/>
             </StackPanel>
         </DockPanel>
         

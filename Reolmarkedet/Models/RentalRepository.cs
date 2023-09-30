@@ -66,7 +66,7 @@ namespace Reolmarkedet.Models
         }
 
 
-        public void GetAllRentals()
+        public ObservableCollection<Rental> GetAllRentals()
         {
             try
             {
@@ -86,7 +86,7 @@ namespace Reolmarkedet.Models
                                 ThingsSoldCounter = Convert.ToInt32(dr[nameof(Rental.ThingsSoldCounter)]),
                                 TotalAmountSoldFor = Convert.ToDouble(dr[nameof(Rental.TotalAmountSoldFor)]),
                                 Settled = Convert.ToBoolean(dr[nameof(Rental.Settled)]),
-                                TenantID = Convert.ToInt32(dr[nameof(Rental.ID)])
+                                TenantID = Convert.ToInt32(dr[nameof(Rental.TenantID)])
                             };
                             _rentals.Add(tempRental);
                         }
@@ -99,6 +99,7 @@ namespace Reolmarkedet.Models
 
                 throw new Exception(e.Message);
             }
+            return _rentals;
 
         }
 

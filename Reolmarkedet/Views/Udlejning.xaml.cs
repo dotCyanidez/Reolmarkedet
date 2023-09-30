@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Reolmarkedet.Views
@@ -17,7 +18,7 @@ namespace Reolmarkedet.Views
     /// <summary>
     /// Interaction logic for Udlejning.xaml
     /// </summary>
-    public partial class Udlejning : Window
+    public partial class Udlejning : UserControl
     {
         public Udlejning()
         {
